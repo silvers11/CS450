@@ -1,4 +1,9 @@
-﻿  sample.cpp
-c:\users\steven\downloads\sample\samplefreeglut\sample.cpp(1096): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
-  Sample.vcxproj -> C:\Users\Steven\Downloads\Sample\SampleFreeGlut\.\Debug\Sample.exe
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (.\Debug\) contains files shared from another project (HW1StevenSilvers.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Sample.cpp
+c:\users\steven\documents\github\450\hw1\samplefreeglut\sample.cpp(759): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\github\450\hw1\samplefreeglut\sample.cpp(760): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\github\450\hw1\samplefreeglut\sample.cpp(774): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\github\450\hw1\samplefreeglut\sample.cpp(775): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\github\450\hw1\samplefreeglut\sample.cpp(1125): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+Sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+  Sample.vcxproj -> C:\Users\Steven\Documents\GitHub\450\HW1\SampleFreeGlut\.\Debug\Sample.exe

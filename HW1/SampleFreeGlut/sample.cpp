@@ -336,7 +336,7 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	gluLookAt( 0., 0., -15.,     0., 0., 0.,     0., 1., 0. );
 
 
 	// rotate the scene:
@@ -389,10 +389,11 @@ Display( )
 
 
 	// draw some gratuitous text that just rotates on top of the scene:
-
+/*
 	glDisable( GL_DEPTH_TEST );
 	glColor3f( 0., 1., 1. );
 	DoRasterString( 0., 1., 0., "Text That Moves" );
+*/
 
 
 	// draw some gratuitous text that is fixed on the screen:
@@ -412,7 +413,7 @@ Display( )
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity( );
 	glColor3f( 1., 1., 1. );
-	DoRasterString( 5., 5., 0., "Text That Doesn't" );
+	DoRasterString( 5., 5., 0., "Steven Silvers HW1" );
 
 
 	// swap the double-buffered framebuffers:
@@ -748,7 +749,35 @@ InitLists( )
 				glVertex3f(  dx, -dy,  dz );
 
 		glEnd( );
+		//glClear(GL_COLOR_BUFFER_BIT);
+		float x, y, z = -50, angle;
+		glBegin(GL_LINE_STRIP);
 
+		for (angle = 0; angle < 360; angle += 1)
+		{
+			glColor3f(z/360, z/360, z/360);
+			x = 20 * cos(angle);
+			y = 20 * sin(angle);
+			glVertex3f(x, y, z);
+			z += 1;
+		}
+		glEnd();
+		glBegin(GL_LINE_STRIP);
+		
+		x = -50;
+		y = -50;
+		z = -50;
+		float dangle = 360;
+		for (angle = 0; angle < 360; angle += 1)
+		{
+			glColor3f(dangle / 360, dangle / 360, dangle / 360);
+			x = 40 * cos(angle);
+			y = 40 * sin(angle);
+			glVertex3f(x, y, z);
+			z += 1;
+			dangle--;
+		}
+		glEnd();
 	glEndList( );
 
 
