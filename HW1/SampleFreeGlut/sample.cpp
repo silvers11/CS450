@@ -43,7 +43,7 @@
 
 // title of these windows:
 
-const char *WINDOWTITLE = { "OpenGL / GLUT Sample -- Joe Graphics" };
+const char *WINDOWTITLE = { "Steven Silvers HW1" };
 const char *GLUITITLE   = { "User Interface Window" };
 
 
