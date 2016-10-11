@@ -107,6 +107,10 @@ enum ButtonVals
 	QUIT
 };
 
+enum Views {
+	OUTSIDE,
+	INSIDE
+};
 
 // window background color (rgba):
 
@@ -180,10 +184,12 @@ int		DebugOn;				// != 0 means to print debugging info
 int		DepthCueOn;				// != 0 means to use intensity depth cueing
 GLuint	BoxList;				// object display list
 GLuint	BladeList;				//blade display list
+GLuint	TailList;
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
 int		WhichColor;				// index into Colors[ ]
 int		WhichProjection;		// ORTHO or PERSP
+int		WhichView;
 int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 float BladeAngle;
@@ -205,6 +211,7 @@ void	DoDepthMenu( int );
 void	DoDebugMenu( int );
 void	DoMainMenu( int );
 void	DoProjectMenu( int );
+void	DoViewMenu( int );
 void	DoRasterString( float, float, float, char * );
 void	DoStrokeString( float, float, float, float, char * );
 float	ElapsedSeconds( );
@@ -351,20 +358,26 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 9., 6., 10.,     0., 0., 0.,     0., 1., 0. );
+
 
 
 	// rotate the scene:
 
-	glRotatef( (GLfloat)Yrot, 0., 1., 0. );
-	glRotatef( (GLfloat)Xrot, 1., 0., 0. );
-
+	if (WhichView == INSIDE) {
+		gluLookAt(-0.4, 1.8, -4.9, -0.4, 1.8, -7.0, 0., 1., 0.);
+	}
+	else {
+		gluLookAt(9., 6., 10., 0., 0., 0., 0., 1., 0.);
+		glRotatef((GLfloat)Yrot, 0., 1., 0.);
+		glRotatef((GLfloat)Xrot, 1., 0., 0.);
+		if (Scale < MINSCALE)
+			Scale = MINSCALE;
+		glScalef((GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale);
+	}
 
 	// uniformly scale the scene:
 
-	if( Scale < MINSCALE )
-		Scale = MINSCALE;
-	glScalef( (GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale );
+
 
 
 	// set the fog parameters:
@@ -403,10 +416,20 @@ Display( )
 	
 
 	glCallList( BoxList );
+	glPushMatrix();
 	glTranslatef(0., 2.9, -2.);
-	glRotatef(BladeAngle/2, 0., 0., 0.);
+	glRotatef(BladeAngle/3, 0., 0., 0.);
 	glTranslatef(0., -2.9, 2.);
 	glCallList(BladeList);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(.5, 2.5, 9.);
+	glRotatef(BladeAngle, 0., 0., 0.);
+	glTranslatef(-.5, -2.5, -9.);
+	glCallList(TailList);
+	glPopMatrix();
+
 
 
 	// draw some gratuitous text that just rotates on top of the scene:
@@ -528,6 +551,16 @@ DoProjectMenu( int id )
 }
 
 
+void
+DoViewMenu(int id)
+{
+	WhichView = id;
+
+	glutSetWindow(MainWindow);
+	glutPostRedisplay();
+}
+
+
 // use glut to display a string of characters using a raster font:
 
 void
@@ -601,7 +634,9 @@ InitMenus( )
 	int debugmenu = glutCreateMenu( DoDebugMenu );
 	glutAddMenuEntry( "Off",  0 );
 	glutAddMenuEntry( "On",   1 );
-
+	int viewmenu = glutCreateMenu(DoViewMenu);
+	glutAddMenuEntry("Outside", OUTSIDE);
+	glutAddMenuEntry("Inside", INSIDE);
 	int projmenu = glutCreateMenu( DoProjectMenu );
 	glutAddMenuEntry( "Orthographic",  ORTHO );
 	glutAddMenuEntry( "Perspective",   PERSP );
@@ -611,6 +646,7 @@ InitMenus( )
 	glutAddSubMenu(   "Colors",        colormenu);
 	glutAddSubMenu(   "Depth Cue",     depthcuemenu);
 	glutAddSubMenu(   "Projection",    projmenu );
+	glutAddSubMenu("View", viewmenu);
 	glutAddMenuEntry( "Reset",         RESET );
 	glutAddSubMenu(   "Debug",         debugmenu);
 	glutAddMenuEntry( "Quit",          QUIT );
@@ -741,6 +777,10 @@ InitLists( )
 	}
 	glEnd();
 	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(0.,1.8,-15);
+	glutWireTeapot(2.);
+	glPopMatrix();
 	glEndList( );
 
 
@@ -770,12 +810,25 @@ InitLists( )
 	glEnd();
 	// draw the helicopter blade with radius BLADE_RADIUS and
 	//	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane
+	glEndList();
+
+	// create the tail blades
+	TailList = glGenLists(1);
+	glNewList(TailList, GL_COMPILE);
 
 	
-	
-	
-	
-	
+	glBegin(GL_TRIANGLES);
+	glVertex3f(.5, BLADE_RADIUS, 8.5+BLADE_WIDTH);
+	glVertex3f(.5, 2.5, 9.);
+	glVertex3f(.5, BLADE_RADIUS, 9.+BLADE_WIDTH);
+	glEnd();
+	glBegin(GL_TRIANGLES);
+	glVertex3f(.5, BLADE_RADIUS * 4, 8.5 + BLADE_WIDTH);
+	glVertex3f(.5, 2.5, 9.);
+	glVertex3f(.5, BLADE_RADIUS * 4, 9 + BLADE_WIDTH);
+	glEnd();
+	// draw the helicopter blade with radius BLADE_RADIUS and
+	//	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane
 	glEndList();
 }
 
@@ -798,6 +851,14 @@ Keyboard( unsigned char c, int x, int y )
 		case 'p':
 		case 'P':
 			WhichProjection = PERSP;
+			break;
+		case 'i':
+		case 'I':
+			WhichView = INSIDE;
+			break;
+		case 'u':
+		case 'U':
+			WhichView = OUTSIDE;
 			break;
 
 		case 'q':
@@ -913,6 +974,7 @@ Reset( )
 	Scale  = 1.0;
 	WhichColor = WHITE;
 	WhichProjection = PERSP;
+	WhichView = OUTSIDE;
 	Xrot = Yrot = 0.;
 }
 
