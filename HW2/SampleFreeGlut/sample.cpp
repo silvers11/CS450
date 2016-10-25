@@ -193,6 +193,7 @@ int		WhichView;
 int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 float BladeAngle;
+float TailAngle;
 
 // blade parameters:
 
@@ -291,7 +292,10 @@ Animate( )
 		BladeAngle = 0;
 	}
 	// for Display( ) to find:
-
+	TailAngle = BladeAngle * 3;
+	if (TailAngle > 360) {
+		TailAngle = TailAngle - 360;
+	}
 	// force a call to Display( ) next time it is convenient:
 
 	glutSetWindow( MainWindow );
@@ -418,14 +422,14 @@ Display( )
 	glCallList( BoxList );
 	glPushMatrix();
 	glTranslatef(0., 2.9, -2.);
-	glRotatef(BladeAngle/3, 0., 0., 0.);
+	glRotatef(BladeAngle, 0., 0., 0.);
 	glTranslatef(0., -2.9, 2.);
 	glCallList(BladeList);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(.5, 2.5, 9.);
-	glRotatef(BladeAngle, 0., 0., 0.);
+	glRotatef(TailAngle, 0., 0., 0.);
 	glTranslatef(-.5, -2.5, -9.);
 	glCallList(TailList);
 	glPopMatrix();
@@ -804,9 +808,9 @@ InitLists( )
 	glVertex3f(BLADE_RADIUS * 5, 2.9, BLADE_WIDTH+1);
 	glEnd();
 	glBegin(GL_TRIANGLES);
-	glVertex3f(-BLADE_RADIUS*5,2.9, -BLADE_WIDTH+1);
+	glVertex3f(-BLADE_RADIUS * 5, 2.9, -BLADE_WIDTH+1);
 	glVertex3f(0., 2.9, -2.);
-	glVertex3f(-BLADE_RADIUS*5,2.9,-BLADE_WIDTH-1);
+	glVertex3f(-BLADE_RADIUS * 5, 2.9,-BLADE_WIDTH-1);
 	glEnd();
 	// draw the helicopter blade with radius BLADE_RADIUS and
 	//	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane

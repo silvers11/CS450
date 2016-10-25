@@ -1,18 +1,18 @@
 ﻿  sample.cpp
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(420): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(422): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(781): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(802): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(803): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(804): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(424): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(426): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(785): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(806): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(807): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(808): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(809): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(821): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(823): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(826): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(828): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(1175): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(811): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(812): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(813): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(825): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(827): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(830): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(832): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\steve\documents\school\cs450\hw2\samplefreeglut\sample.cpp(1179): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
   Sample.vcxproj -> C:\Users\steve\Documents\School\CS450\HW2\SampleFreeGlut\.\Debug\Sample.exe
   Sample.vcxproj -> .\Debug/Sample.pdb (Full PDB)
