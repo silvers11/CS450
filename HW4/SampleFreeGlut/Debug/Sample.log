@@ -1,0 +1,22 @@
+﻿  sample.cpp
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(206): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(206): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(207): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(207): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(294): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(295): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(296): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(299): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(300): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(301): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(316): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(317): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(643): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(660): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(693): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(696): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(714): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\steve\documents\school\cs450\hw4\samplefreeglut\sample.cpp(1437): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+  Sample.vcxproj -> C:\Users\steve\Documents\School\CS450\HW4\SampleFreeGlut\.\Debug\Sample.exe
+  Sample.vcxproj -> .\Debug/Sample.pdb (Full PDB)
