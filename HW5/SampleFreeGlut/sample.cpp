@@ -11,6 +11,7 @@
 #include "glew.h"
 #endif
 
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "glut.h"
@@ -53,7 +54,7 @@ const char *GLUITITLE   = { "User Interface Window" };
 
 const int GLUITRUE  = { true  };
 const int GLUIFALSE = { false };
-const int MS_PER_CYCLE = 1000000000;
+const int MS_PER_CYCLE = 100000000000;
 
 // the escape key:
 
@@ -187,6 +188,8 @@ int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 float	Time;					//for animation
 GLSLProgram *Pattern;
+int z = 0;
+
 
 
 // function prototypes:
@@ -215,6 +218,166 @@ void	Visibility( int );
 void	Axes( float );
 void	HsvRgb( float[3], float [3] );
 
+
+bool	Distort;		// global -- true means to distort the texture
+
+struct point {
+	float x, y, z;		// coordinates
+	float nx, ny, nz;	// surface normal
+	float s, t;		// texture coords
+};
+
+int		NumLngs, NumLats;
+struct point *	Pts;
+
+struct point *
+	PtsPointer(int lat, int lng)
+{
+	if (lat < 0)	lat += (NumLats - 1);
+	if (lng < 0)	lng += (NumLngs - 1);
+	if (lat > NumLats - 1)	lat -= (NumLats - 1);
+	if (lng > NumLngs - 1)	lng -= (NumLngs - 1);
+	return &Pts[NumLngs*lat + lng];
+}
+
+
+
+void
+DrawPoint(struct point *p)
+{
+	glNormal3f(p->nx, p->ny, p->nz);
+	glTexCoord2f(p->s, p->t);
+	glVertex3f(p->x, p->y, p->z);
+}
+
+void
+MjbSphere(float radius, int slices, int stacks)
+{
+	struct point top, bot;		// top, bottom points
+	struct point *p;
+
+	// set the globals:
+
+	NumLngs = slices;
+	NumLats = stacks;
+
+	if (NumLngs < 3)
+		NumLngs = 3;
+
+	if (NumLats < 3)
+		NumLats = 3;
+
+
+	// allocate the point data structure:
+
+	Pts = new struct point[NumLngs * NumLats];
+
+
+	// fill the Pts structure:
+
+	for (int ilat = 0; ilat < NumLats; ilat++)
+	{
+		float lat = -M_PI / 2. + M_PI * (float)ilat / (float)(NumLats - 1);
+		float xz = cos(lat);
+		float y = sin(lat);
+		for (int ilng = 0; ilng < NumLngs; ilng++)
+		{
+			float lng = -M_PI + 2. * M_PI * (float)ilng / (float)(NumLngs - 1);
+			float x = xz * cos(lng);
+			float z = -xz * sin(lng);
+			p = PtsPointer(ilat, ilng);
+			p->x = radius * x;
+			p->y = radius * y;
+			p->z = radius * z;
+			p->nx = x;
+			p->ny = y;
+			p->nz = z;
+			if (Distort)
+			{
+				//p->s = ? ? ? ? ?
+				//	p->t = ? ? ? ? ?
+			}
+			else
+			{
+				p->s = (lng + M_PI) / (2.*M_PI);
+				p->t = (lat + M_PI / 2.) / M_PI;
+			}
+		}
+	}
+
+	top.x = 0.;		top.y = radius;	top.z = 0.;
+	top.nx = 0.;		top.ny = 1.;		top.nz = 0.;
+	top.s = 0.;		top.t = 1.;
+
+	bot.x = 0.;		bot.y = -radius;	bot.z = 0.;
+	bot.nx = 0.;		bot.ny = -1.;		bot.nz = 0.;
+	bot.s = 0.;		bot.t = 0.;
+
+
+	// connect the north pole to the latitude NumLats-2:
+
+	glBegin(GL_QUADS);
+	for (int ilng = 0; ilng < NumLngs - 1; ilng++)
+	{
+		p = PtsPointer(NumLats - 1, ilng);
+		DrawPoint(p);
+
+		p = PtsPointer(NumLats - 2, ilng);
+		DrawPoint(p);
+
+		p = PtsPointer(NumLats - 2, ilng + 1);
+		DrawPoint(p);
+
+		p = PtsPointer(NumLats - 1, ilng + 1);
+		DrawPoint(p);
+	}
+	glEnd();
+
+	// connect the south pole to the latitude 1:
+
+	glBegin(GL_QUADS);
+	for (int ilng = 0; ilng < NumLngs - 1; ilng++)
+	{
+		p = PtsPointer(0, ilng);
+		DrawPoint(p);
+
+		p = PtsPointer(0, ilng + 1);
+		DrawPoint(p);
+
+		p = PtsPointer(1, ilng + 1);
+		DrawPoint(p);
+
+		p = PtsPointer(1, ilng);
+		DrawPoint(p);
+	}
+	glEnd();
+
+
+	// connect the other 4-sided polygons:
+
+	glBegin(GL_QUADS);
+	for (int ilat = 2; ilat < NumLats - 1; ilat++)
+	{
+		for (int ilng = 0; ilng < NumLngs - 1; ilng++)
+		{
+			p = PtsPointer(ilat - 1, ilng);
+			DrawPoint(p);
+
+			p = PtsPointer(ilat - 1, ilng + 1);
+			DrawPoint(p);
+
+			p = PtsPointer(ilat, ilng + 1);
+			DrawPoint(p);
+
+			p = PtsPointer(ilat, ilng);
+			DrawPoint(p);
+		}
+	}
+	glEnd();
+
+	delete[] Pts;
+	Pts = NULL;
+}
 // main program:
 
 int
@@ -277,7 +440,7 @@ Animate( )
 	ms %= MS_PER_CYCLE;
 	Time = (float)ms / (float)MS_PER_CYCLE;		// [0.,1.)
 	// force a call to Display( ) next time it is convenient:
-
+	Pattern->SetUniformVariable("uTime", Time);
 	glutSetWindow( MainWindow );
 	glutPostRedisplay( );
 }
@@ -390,15 +553,42 @@ Display( )
 
 
 	// draw the current object:
+	float x0, x1, x2, y0, y1, y2;
+	x0 = 5;
+	x1 = 5;
+	x2 = 2;
+	y0 = 0;
+	y1 = 5;
+	y2 = 5;
 
-	glCallList( BoxList );
+
+	float vershade = 2;
+	Pattern->Use();
+	Pattern->SetUniformVariable("ux0", x0);
+	Pattern->SetUniformVariable("ux1", x1);
+	Pattern->SetUniformVariable("ux2", x2);
+	Pattern->SetUniformVariable("uy0", y0);
+	Pattern->SetUniformVariable("uy1", y1);
+	Pattern->SetUniformVariable("uy2", y2);
+	Pattern->SetUniformVariable("uz", z);
+
+	Pattern->SetUniformVariable("uColor", 1, 0, 0 );
+	glBegin(GL_TRIANGLES);
+	//Pattern->SetAttributeVariable("aV0", V0); // don’t need for Project #5
+	glVertex3f(x0, y0, z);
+	//Pattern->SetAttributeVariable("aV1", V1); // don’t need for Project #5
+	glVertex3f(x1, y1, z);
+	//Pattern->SetAttributeVariable("aV2", V2); // don’t need for Project #5
+	glVertex3f(x2, y2, z);
+	glEnd();
+
+	//glCallList(BoxList);
+	MjbSphere(2, 100, 100);
+	Pattern->Use(0);
+	//glCallList( BoxList );
 
 
 	// draw some gratuitous text that just rotates on top of the scene:
-
-	glDisable( GL_DEPTH_TEST );
-	glColor3f( 0., 1., 1. );
-	DoRasterString( 0., 1., 0., "Text That Moves" );
 
 
 	// draw some gratuitous text that is fixed on the screen:
@@ -411,14 +601,7 @@ Display( )
 	// the modelview matrix is reset to identity as we don't
 	// want to transform these coordinates
 
-	glDisable( GL_DEPTH_TEST );
-	glMatrixMode( GL_PROJECTION );
-	glLoadIdentity( );
-	gluOrtho2D( 0., 100.,     0., 100. );
-	glMatrixMode( GL_MODELVIEW );
-	glLoadIdentity( );
-	glColor3f( 1., 1., 1. );
-	DoRasterString( 5., 5., 0., "Text That Doesn't" );
+
 
 
 	// swap the double-buffered framebuffers:
@@ -672,7 +855,7 @@ InitGraphics( )
 	glutTabletButtonFunc( NULL );
 	glutMenuStateFunc( NULL );
 	glutTimerFunc( -1, NULL, 0 );
-	glutIdleFunc( NULL );
+	glutIdleFunc( Animate );
 
 	// init glew (a window must be open to do this):
 
@@ -693,6 +876,8 @@ InitGraphics( )
 	{
 
 	}
+	Pattern->SetUniformVariable("uTime", Time);
+	Pattern->SetUniformVariable("Ds", 2);
 }
 
 
