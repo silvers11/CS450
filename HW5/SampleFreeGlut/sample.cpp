@@ -563,7 +563,8 @@ Display( )
 	//y1 = 5;
 	//y2 = 5;
 
-
+	Pattern->SetUniformVariable("uV", vertex);
+	Pattern->SetUniformVariable("uf", frag);
 	Pattern->Use();
 	//Pattern->SetUniformVariable("ux0", x0);
 	//Pattern->SetUniformVariable("ux1", x1);
@@ -571,15 +572,12 @@ Display( )
 	//Pattern->SetUniformVariable("uy0", y0);
 	//Pattern->SetUniformVariable("uy1", y1);
 	//Pattern->SetUniformVariable("uy2", y2);
-	Pattern->SetUniformVariable("uV", vertex);
-	Pattern->SetUniformVariable("uf", frag);
+
 
 	Pattern->SetUniformVariable("uColor", 1, 0, 0 );
 
-	//glCallList(BoxList);
 	MjbSphere(2, 100, 100);
 	Pattern->Use(0);
-	//glCallList( BoxList );
 
 
 	// draw some gratuitous text that just rotates on top of the scene:
@@ -986,15 +984,22 @@ Keyboard( unsigned char c, int x, int y )
 		case 'F':
 			frag = true;
 			vertex = false;
-			glutPostRedisplay();
 			break;
 
-		case 't':
+		case 'V':
 			frag = false;
 			vertex = true;
-			glutPostRedisplay();
 			break;
 
+		case 'N':
+			frag = false;
+			vertex = false;
+			break;
+
+		case 'B':
+			frag = true;
+			vertex = true;
+			break;
 		case 'q':
 		case 'Q':
 		case ESCAPE:
@@ -1102,7 +1107,7 @@ void
 Reset( )
 {
 	ActiveButton = 0;
-	AxesOn = 1;
+	AxesOn = 0;
 	DebugOn = 0;
 	DepthCueOn = 0;
 	Scale  = 1.0;
