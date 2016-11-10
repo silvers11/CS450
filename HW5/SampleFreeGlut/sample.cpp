@@ -188,7 +188,9 @@ int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 float	Time;					//for animation
 GLSLProgram *Pattern;
-int z = 0;
+bool	vertex = true;
+bool	frag = true;
+bool	Freeze = true;
 
 
 
@@ -553,34 +555,26 @@ Display( )
 
 
 	// draw the current object:
-	float x0, x1, x2, y0, y1, y2;
-	x0 = 5;
-	x1 = 5;
-	x2 = 2;
-	y0 = 0;
-	y1 = 5;
-	y2 = 5;
+	//float x0, x1, x2, y0, y1, y2;
+	//x0 = 5;
+	//x1 = 5;
+	//x2 = 2;
+	//y0 = 0;
+	//y1 = 5;
+	//y2 = 5;
 
 
-	float vershade = 2;
 	Pattern->Use();
-	Pattern->SetUniformVariable("ux0", x0);
-	Pattern->SetUniformVariable("ux1", x1);
-	Pattern->SetUniformVariable("ux2", x2);
-	Pattern->SetUniformVariable("uy0", y0);
-	Pattern->SetUniformVariable("uy1", y1);
-	Pattern->SetUniformVariable("uy2", y2);
-	Pattern->SetUniformVariable("uz", z);
+	//Pattern->SetUniformVariable("ux0", x0);
+	//Pattern->SetUniformVariable("ux1", x1);
+	//Pattern->SetUniformVariable("ux2", x2);
+	//Pattern->SetUniformVariable("uy0", y0);
+	//Pattern->SetUniformVariable("uy1", y1);
+	//Pattern->SetUniformVariable("uy2", y2);
+	Pattern->SetUniformVariable("uV", vertex);
+	Pattern->SetUniformVariable("uf", frag);
 
 	Pattern->SetUniformVariable("uColor", 1, 0, 0 );
-	glBegin(GL_TRIANGLES);
-	//Pattern->SetAttributeVariable("aV0", V0); // don’t need for Project #5
-	glVertex3f(x0, y0, z);
-	//Pattern->SetAttributeVariable("aV1", V1); // don’t need for Project #5
-	glVertex3f(x1, y1, z);
-	//Pattern->SetAttributeVariable("aV2", V2); // don’t need for Project #5
-	glVertex3f(x2, y2, z);
-	glEnd();
 
 	//glCallList(BoxList);
 	MjbSphere(2, 100, 100);
@@ -979,6 +973,26 @@ Keyboard( unsigned char c, int x, int y )
 		case 'p':
 		case 'P':
 			WhichProjection = PERSP;
+			break;
+
+		case 'f':
+			Freeze = !Freeze;
+			if (Freeze)
+				glutIdleFunc(NULL);
+			else
+				glutIdleFunc(Animate);
+			break;
+
+		case 'F':
+			frag = true;
+			vertex = false;
+			glutPostRedisplay();
+			break;
+
+		case 't':
+			frag = false;
+			vertex = true;
+			glutPostRedisplay();
 			break;
 
 		case 'q':
