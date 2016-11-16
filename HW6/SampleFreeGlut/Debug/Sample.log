@@ -1,0 +1,15 @@
+﻿  sample.cpp
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(188): warning C4305: 'initializing': truncation from '__int64' to 'int'
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(188): warning C4309: 'initializing': truncation of constant value
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(283): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(289): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(290): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(300): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(305): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(307): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(317): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(322): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(323): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\hw6\samplefreeglut\sample.cpp(1217): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+  Sample.vcxproj -> C:\Users\Steven\Documents\school\CS\CS450\HW6\SampleFreeGlut\.\Debug\Sample.exe
