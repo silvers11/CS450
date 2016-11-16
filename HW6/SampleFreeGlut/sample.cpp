@@ -184,7 +184,7 @@ int		WhichProjection;		// ORTHO or PERSP
 int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze = true;
-int NUMPOINTS = 4;
+int NUMPOINTS = 20;
 const int NUMCURVES = 10;
 const int MS_PER_CYCLE = 10000;
 float Time;
@@ -455,27 +455,111 @@ Display( )
 
 	glEnable( GL_NORMALIZE );
 
-	//setup curve
-	
+
+	//curve 0
 	Stem[0].p0.x0 = 0;
 	Stem[0].p0.y0 = 0;
 	Stem[0].p0.z0 = 0;
 
 	Stem[0].p1.x0 = 1;
-	Stem[0].p1.y0 = 1;
-	Stem[0].p1.z0 = -.5;
+	Stem[0].p1.y0 = .5;
+	Stem[0].p1.z0 = -1;
 
-	Stem[0].p2.x0 = 1.5;
-	Stem[0].p2.y0 = 0;
+	Stem[0].p2.x0 = 1;
+	Stem[0].p2.y0 = .5;
 	Stem[0].p2.z0 = 1;
 
 	Stem[0].p3.x0 = 0;
 	Stem[0].p3.y0 = 0;
 	Stem[0].p3.z0 = 0;
 
+	//curve 1
+	Stem[1].p0.x0 = 0;
+	Stem[1].p0.y0 = 0;
+	Stem[1].p0.z0 = 0;
+
+	Stem[1].p1.x0 = -1;
+	Stem[1].p1.y0 = .5;
+	Stem[1].p1.z0 = 1;
+
+	Stem[1].p2.x0 = -1;
+	Stem[1].p2.y0 = .5;
+	Stem[1].p2.z0 = -1;
+
+	Stem[1].p3.x0 = 0;
+	Stem[1].p3.y0 = 0;
+	Stem[1].p3.z0 = 0;
+
+	//curve 2
+	Stem[2].p0.x0 = 0;
+	Stem[2].p0.y0 = 0;
+	Stem[2].p0.z0 = 0;
+
+	Stem[2].p1.x0 = -1;
+	Stem[2].p1.y0 = .5;
+	Stem[2].p1.z0 = 1;
+
+	Stem[2].p2.x0 = 1;
+	Stem[2].p2.y0 = .5;
+	Stem[2].p2.z0 = 1;
+
+	Stem[2].p3.x0 = 0;
+	Stem[2].p3.y0 = 0;
+	Stem[2].p3.z0 = 0;
+
+	//curve 3
+	Stem[3].p0.x0 = 0;
+	Stem[3].p0.y0 = 0;
+	Stem[3].p0.z0 = 0;
+
+	Stem[3].p1.x0 = -1;
+	Stem[3].p1.y0 = .5;
+	Stem[3].p1.z0 = -1;
+
+	Stem[3].p2.x0 = 1;
+	Stem[3].p2.y0 = .5;
+	Stem[3].p2.z0 = -1;
+
+	Stem[3].p3.x0 = 0;
+	Stem[3].p3.y0 = 0;
+	Stem[3].p3.z0 = 0;
+
+	//curve 4
+	Stem[4].p0.x0 = 0;
+	Stem[4].p0.y0 = 0;
+	Stem[4].p0.z0 = 0;
+
+	Stem[4].p1.x0 = -.5;
+	Stem[4].p1.y0 = 1;
+	Stem[4].p1.z0 = 0;
+
+	Stem[4].p2.x0 = .5;
+	Stem[4].p2.y0 = 1;
+	Stem[4].p2.z0 = 0;
+
+	Stem[4].p3.x0 = 0;
+	Stem[4].p3.y0 = 0;
+	Stem[4].p3.z0 = 0;
+
 	RotateY(&Stem[0].p3, Time * 360, 0, 0, 0);
 	RotateY(&Stem[0].p2, Time * 360, 0, 0, 0);
 	RotateY(&Stem[0].p1, Time * 360, 0, 0, 0);
+
+	RotateY(&Stem[1].p3, Time * 360, 0, 0, 0);
+	RotateY(&Stem[1].p2, Time * 360, 0, 0, 0);
+	RotateY(&Stem[1].p1, Time * 360, 0, 0, 0);
+
+	RotateY(&Stem[2].p3, -Time * 360, 0, 0, 0);
+	RotateY(&Stem[2].p2, -Time * 360, 0, 0, 0);
+	RotateY(&Stem[2].p1, -Time * 360, 0, 0, 0);
+
+	RotateY(&Stem[3].p3, -Time * 360, 0, 0, 0);
+	RotateY(&Stem[3].p2, -Time * 360, 0, 0, 0);
+	RotateY(&Stem[3].p1, -Time * 360, 0, 0, 0);
+
+	RotateY(&Stem[4].p3, -Time * 360, 0, 0, 0);
+	RotateY(&Stem[4].p2, -Time * 360, 0, 0, 0);
+	RotateY(&Stem[4].p1, -Time * 360, 0, 0, 0);
 	//control points
 	glColor3f(1, 1, 1);
 	glPointSize(3);
@@ -484,7 +568,7 @@ Display( )
 		glVertex3f(Stem[i].p0.x0, Stem[i].p0.y0, Stem[i].p0.z0);
 		glVertex3f(Stem[i].p1.x0, Stem[i].p1.y0, Stem[i].p1.z0);
 		glVertex3f(Stem[i].p2.x0, Stem[i].p2.y0, Stem[i].p2.z0);
-		glVertex3f(Stem[i].p3.x, Stem[i].p3.y, Stem[i].p3.z);
+		glVertex3f(Stem[i].p3.x0, Stem[i].p3.y0, Stem[i].p3.z0);
 		glEnd();
 
 		//control lines
@@ -505,9 +589,9 @@ Display( )
 		{
 			float t = (float)it / (float)NUMPOINTS;
 			float omt = 1.f - t;
-			float x = omt*omt*omt*Stem[i].p0.x0 + 3.f*t*omt*omt*Stem[i].p1.x + 3.f*t*t*omt*Stem[i].p2.x + t*t*t*Stem[i].p3.x;
-			float y = omt*omt*omt*Stem[i].p0.y0 + 3.f*t*omt*omt*Stem[i].p1.y + 3.f*t*t*omt*Stem[i].p2.y + t*t*t*Stem[i].p3.y;
-			float z = omt*omt*omt*Stem[i].p0.z0 + 3.f*t*omt*omt*Stem[i].p1.z + 3.f*t*t*omt*Stem[i].p2.z + t*t*t*Stem[i].p3.z;
+			float x = omt*omt*omt*Stem[i].p0.x + 3.f*t*omt*omt*Stem[i].p1.x + 3.f*t*t*omt*Stem[i].p2.x + t*t*t*Stem[i].p3.x;
+			float y = omt*omt*omt*Stem[i].p0.y + 3.f*t*omt*omt*Stem[i].p1.y + 3.f*t*t*omt*Stem[i].p2.y + t*t*t*Stem[i].p3.y;
+			float z = omt*omt*omt*Stem[i].p0.z + 3.f*t*omt*omt*Stem[i].p1.z + 3.f*t*t*omt*Stem[i].p2.z + t*t*t*Stem[i].p3.z;
 			glVertex3f(x, y, z);
 		}
 	}
