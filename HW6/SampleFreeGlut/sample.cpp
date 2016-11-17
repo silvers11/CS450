@@ -188,6 +188,8 @@ int NUMPOINTS = 20;
 const int NUMCURVES = 10;
 const int MS_PER_CYCLE = 10000;
 float Time;
+bool ControlP;
+bool ControlL;
 
 struct Point
 {
@@ -530,17 +532,19 @@ Display( )
 	Stem[4].p0.z0 = 0;
 
 	Stem[4].p1.x0 = -.5;
-	Stem[4].p1.y0 = 1;
+	Stem[4].p1.y0 = .5;
 	Stem[4].p1.z0 = 0;
 
 	Stem[4].p2.x0 = .5;
-	Stem[4].p2.y0 = 1;
+	Stem[4].p2.y0 = .5;
 	Stem[4].p2.z0 = 0;
 
 	Stem[4].p3.x0 = 0;
 	Stem[4].p3.y0 = 0;
 	Stem[4].p3.z0 = 0;
 
+
+	//animations
 	RotateY(&Stem[0].p3, Time * 360, 0, 0, 0);
 	RotateY(&Stem[0].p2, Time * 360, 0, 0, 0);
 	RotateY(&Stem[0].p1, Time * 360, 0, 0, 0);
@@ -560,40 +564,161 @@ Display( )
 	RotateY(&Stem[4].p3, -Time * 360, 0, 0, 0);
 	RotateY(&Stem[4].p2, -Time * 360, 0, 0, 0);
 	RotateY(&Stem[4].p1, -Time * 360, 0, 0, 0);
-	//control points
-	glColor3f(1, 1, 1);
-	glPointSize(3);
-	for (int i = 0; i < NUMCURVES; i++) {
-		glBegin(GL_POINTS);
-		glVertex3f(Stem[i].p0.x0, Stem[i].p0.y0, Stem[i].p0.z0);
-		glVertex3f(Stem[i].p1.x0, Stem[i].p1.y0, Stem[i].p1.z0);
-		glVertex3f(Stem[i].p2.x0, Stem[i].p2.y0, Stem[i].p2.z0);
-		glVertex3f(Stem[i].p3.x0, Stem[i].p3.y0, Stem[i].p3.z0);
-		glEnd();
 
+	//non-animated curves
+
+	//curve 5
+	Stem[5].p0.x0 = 0;
+	Stem[5].p0.y0 = 0;
+	Stem[5].p0.z0 = 0;
+
+	Stem[5].p1.x0 = 1;
+	Stem[5].p1.y0 = .25;
+	Stem[5].p1.z0 = -1.75;
+
+	Stem[5].p2.x0 = 1;
+	Stem[5].p2.y0 = .25;
+	Stem[5].p2.z0 = 1.75;
+
+	Stem[5].p3.x0 = 0;
+	Stem[5].p3.y0 = 0;
+	Stem[5].p3.z0 = 0;
+
+	//curve 6
+	Stem[6].p0.x0 = 0;
+	Stem[6].p0.y0 = 0;
+	Stem[6].p0.z0 = 0;
+
+	Stem[6].p1.x0 = -1;
+	Stem[6].p1.y0 = .25;
+	Stem[6].p1.z0 = -1.75;
+
+	Stem[6].p2.x0 = -1;
+	Stem[6].p2.y0 = .25;
+	Stem[6].p2.z0 = 1.75;
+
+	Stem[6].p3.x0 = 0;
+	Stem[6].p3.y0 = 0;
+	Stem[6].p3.z0 = 0;
+
+	//curve 7
+	Stem[7].p0.x0 = 0;
+	Stem[7].p0.y0 = 0;
+	Stem[7].p0.z0 = 0;
+
+	Stem[7].p1.x0 = -1.75;
+	Stem[7].p1.y0 = .25;
+	Stem[7].p1.z0 = -1;
+
+	Stem[7].p2.x0 = 1.75;
+	Stem[7].p2.y0 = .25;
+	Stem[7].p2.z0 = -1;
+
+	Stem[7].p3.x0 = 0;
+	Stem[7].p3.y0 = 0;
+	Stem[7].p3.z0 = 0;
+
+	//curve 8
+	Stem[8].p0.x0 = 0;
+	Stem[8].p0.y0 = 0;
+	Stem[8].p0.z0 = 0;
+
+	Stem[8].p1.x0 = -1.75;
+	Stem[8].p1.y0 = .25;
+	Stem[8].p1.z0 = 1;
+
+	Stem[8].p2.x0 = 1.75;
+	Stem[8].p2.y0 = .25;
+	Stem[8].p2.z0 = 1;
+
+	Stem[8].p3.x0 = 0;
+	Stem[8].p3.y0 = 0;
+	Stem[8].p3.z0 = 0;
+
+	//curve 9
+	Stem[9].p0.x0 = 0;
+	Stem[9].p0.y0 = 0;
+	Stem[9].p0.z0 = 0;
+
+	Stem[9].p1.x0 = 0;
+	Stem[9].p1.y0 = -.5;
+	Stem[9].p1.z0 = 0;
+
+	Stem[9].p2.x0 = -.25;
+	Stem[9].p2.y0 = -.75;
+	Stem[9].p2.z0 = 0;
+
+	Stem[9].p3.x0 = -.75;
+	Stem[9].p3.y0 = -1;
+	Stem[9].p3.z0 = 0;
+
+
+
+	//control points
+
+	glPointSize(4);
+
+	for (int i = 0; i < NUMCURVES; i++) {
+		if (ControlP == true) {
+			glColor3f(1, 1, 0);
+			glBegin(GL_POINTS);
+			glVertex3f(Stem[i].p0.x0, Stem[i].p0.y0, Stem[i].p0.z0);
+			glVertex3f(Stem[i].p1.x0, Stem[i].p1.y0, Stem[i].p1.z0);
+			glVertex3f(Stem[i].p2.x0, Stem[i].p2.y0, Stem[i].p2.z0);
+			glVertex3f(Stem[i].p3.x0, Stem[i].p3.y0, Stem[i].p3.z0);
+			glEnd();
+		}
 		//control lines
-		glBegin(GL_LINE_STRIP);
-		glVertex3f(Stem[i].p0.x0, Stem[i].p0.y0, Stem[i].p0.z0);
-		glVertex3f(Stem[i].p1.x0, Stem[i].p1.y0, Stem[i].p1.z0);
-		glVertex3f(Stem[i].p2.x0, Stem[i].p2.y0, Stem[i].p2.z0);
-		glVertex3f(Stem[i].p3.x0, Stem[i].p3.y0, Stem[i].p3.z0);
-		glEnd();
+		if (ControlL == true) {
+			glColor3f(1, 1, 1);
+			glBegin(GL_LINE_STRIP);
+			glVertex3f(Stem[i].p0.x0, Stem[i].p0.y0, Stem[i].p0.z0);
+			glVertex3f(Stem[i].p1.x0, Stem[i].p1.y0, Stem[i].p1.z0);
+			glVertex3f(Stem[i].p2.x0, Stem[i].p2.y0, Stem[i].p2.z0);
+			glVertex3f(Stem[i].p3.x0, Stem[i].p3.y0, Stem[i].p3.z0);
+			glEnd();
+		}
 	}
 	// draw the current object:
 
 	glLineWidth(3.);
 	glColor3f(Time, 0, 1 - Time);
 	glBegin(GL_LINE_STRIP);
-	for (int i = 0; i < NUMCURVES; i++) {
+	for (int i = 0; i < NUMCURVES-1; i++) {
 		for (int it = 0; it <= NUMPOINTS; it++)
 		{
 			float t = (float)it / (float)NUMPOINTS;
 			float omt = 1.f - t;
-			float x = omt*omt*omt*Stem[i].p0.x + 3.f*t*omt*omt*Stem[i].p1.x + 3.f*t*t*omt*Stem[i].p2.x + t*t*t*Stem[i].p3.x;
-			float y = omt*omt*omt*Stem[i].p0.y + 3.f*t*omt*omt*Stem[i].p1.y + 3.f*t*t*omt*Stem[i].p2.y + t*t*t*Stem[i].p3.y;
-			float z = omt*omt*omt*Stem[i].p0.z + 3.f*t*omt*omt*Stem[i].p1.z + 3.f*t*t*omt*Stem[i].p2.z + t*t*t*Stem[i].p3.z;
-			glVertex3f(x, y, z);
+			if (i >= 5) {
+
+				glColor3f(1-Time, 0, Time);
+				float x = omt*omt*omt*Stem[i].p0.x0 + 3.f*t*omt*omt*Stem[i].p1.x0 + 3.f*t*t*omt*Stem[i].p2.x0 + t*t*t*Stem[i].p3.x0;
+				float y = omt*omt*omt*Stem[i].p0.y0 + 3.f*t*omt*omt*Stem[i].p1.y0 + 3.f*t*t*omt*Stem[i].p2.y0 + t*t*t*Stem[i].p3.y0;
+				float z = omt*omt*omt*Stem[i].p0.z0 + 3.f*t*omt*omt*Stem[i].p1.z0 + 3.f*t*t*omt*Stem[i].p2.z0 + t*t*t*Stem[i].p3.z0;
+				glVertex3f(x, y, z);
+			}
+			else {
+				float x = omt*omt*omt*Stem[i].p0.x + 3.f*t*omt*omt*Stem[i].p1.x + 3.f*t*t*omt*Stem[i].p2.x + t*t*t*Stem[i].p3.x;
+				float y = omt*omt*omt*Stem[i].p0.y + 3.f*t*omt*omt*Stem[i].p1.y + 3.f*t*t*omt*Stem[i].p2.y + t*t*t*Stem[i].p3.y;
+				float z = omt*omt*omt*Stem[i].p0.z + 3.f*t*omt*omt*Stem[i].p1.z + 3.f*t*t*omt*Stem[i].p2.z + t*t*t*Stem[i].p3.z;
+				glVertex3f(x, y, z);
+			}
+
 		}
+	}
+	glEnd();
+
+	glLineWidth(8);
+	glBegin(GL_LINE_STRIP);
+	for (int it = 0; it <= NUMPOINTS; it++)
+	{
+		float t = (float)it / (float)NUMPOINTS;
+		float omt = 1.f - t;
+		glColor3f(1 - Time, 0, Time);
+		float x = omt*omt*omt*Stem[9].p0.x0 + 3.f*t*omt*omt*Stem[9].p1.x0 + 3.f*t*t*omt*Stem[9].p2.x0 + t*t*t*Stem[9].p3.x0;
+		float y = omt*omt*omt*Stem[9].p0.y0 + 3.f*t*omt*omt*Stem[9].p1.y0 + 3.f*t*t*omt*Stem[9].p2.y0 + t*t*t*Stem[9].p3.y0;
+		float z = omt*omt*omt*Stem[9].p0.z0 + 3.f*t*omt*omt*Stem[9].p1.z0 + 3.f*t*t*omt*Stem[9].p2.z0 + t*t*t*Stem[9].p3.z0;
+		glVertex3f(x, y, z);
 	}
 	glEnd();
 	glLineWidth(1.);
@@ -985,7 +1110,12 @@ Keyboard( unsigned char c, int x, int y )
 
 		case 'p':
 		case 'P':
-			WhichProjection = PERSP;
+			ControlP = !ControlP;
+			break;
+
+		case 'l':
+		case 'L':
+			ControlL = !ControlL;
 			break;
 
 		case 'f':
@@ -1103,7 +1233,7 @@ void
 Reset( )
 {
 	ActiveButton = 0;
-	AxesOn = 1;
+	AxesOn = 0;
 	DebugOn = 0;
 	DepthCueOn = 0;
 	Scale  = 1.0;
