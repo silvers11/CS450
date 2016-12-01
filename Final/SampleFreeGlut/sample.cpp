@@ -43,7 +43,7 @@
 
 // title of these windows:
 
-const char *WINDOWTITLE = { "OpenGL / GLUT Sample -- Joe Graphics" };
+const char *WINDOWTITLE = { "Steven Silvers FINAL" };
 const char *GLUITITLE   = { "User Interface Window" };
 
 
@@ -176,7 +176,7 @@ GLuint	AxesList;				// list to hold the axes
 int		AxesOn;					// != 0 means to draw the axes
 int		DebugOn;				// != 0 means to print debugging info
 int		DepthCueOn;				// != 0 means to use intensity depth cueing
-GLuint	BoxList;				// object display list
+GLuint	SunList, EarthList;		// object display list
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
 int		WhichColor;				// index into Colors[ ]
@@ -187,16 +187,16 @@ float	Xrot, Yrot;				// rotation angles in degrees
 //variables for project
 float	Time;
 bool	Freeze;
-const int MS_PER_CYCLE = 100000;
-unsigned char* MyTex;
-unsigned char* MyTex2;
-int TexWidth = 1024;
-int TexHeight = 512;
-int Width = 2614;
-int Height = 2489;
-int Width2 = 800;
-int Height2 = 800;
-GLuint tex0, tex1;
+int		MS_PER_CYCLE = 1000000;
+unsigned char*	MyTex;
+unsigned char*	MyTex2;
+int	TexWidth = 1024;
+int	TexHeight = 512;
+int	Width = 2614;
+int	Height = 2489;
+int	Width2 = 800;
+int	Height2 = 800;
+GLuint	tex0, tex1;
 int level, ncomps, border;
 
 // function prototypes:
@@ -762,8 +762,14 @@ Display( )
 
 
 	// draw the current object:
-	glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0);
-	glCallList( BoxList );
+	glPushMatrix();
+	glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 35/365 = 10.4
+	glCallList( SunList );
+	glPopMatrix();
+	glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0); // one cycle = one year
+	glTranslatef(9, 0, 0);
+	glRotatef((GLfloat)Time * 360 * 365, 0.0, 1.0, 0.0); //completes 365 rotations a year
+	glCallList(EarthList);
 
 
 	// draw some gratuitous text that just rotates on top of the scene:
@@ -783,14 +789,7 @@ Display( )
 	// the modelview matrix is reset to identity as we don't
 	// want to transform these coordinates
 
-	glDisable( GL_DEPTH_TEST );
-	glMatrixMode( GL_PROJECTION );
-	glLoadIdentity( );
-	gluOrtho2D( 0., 100.,     0., 100. );
-	glMatrixMode( GL_MODELVIEW );
-	glLoadIdentity( );
-	glColor3f( 1., 1., 1. );
-	DoRasterString( 5., 5., 0., "Text That Doesn't" );
+
 
 
 	// swap the double-buffered framebuffers:
@@ -1077,63 +1076,29 @@ InitLists( )
 
 	// create the object:
 
-	BoxList = glGenLists( 1 );
-	glNewList( BoxList, GL_COMPILE );
+	SunList = glGenLists( 1 );
+	glNewList(SunList, GL_COMPILE );
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex1);
-	MjbSphere(2, 100, 100);
+	MjbSphere(3, 100, 100);
 
 	glDisable(GL_TEXTURE_2D);
 
-		glBegin( GL_QUADS );
-
-			glColor3f( 0., 0., 1. );
-			glNormal3f( 0., 0.,  1. );
-				glVertex3f( -dx, -dy,  dz );
-				glVertex3f(  dx, -dy,  dz );
-				glVertex3f(  dx,  dy,  dz );
-				glVertex3f( -dx,  dy,  dz );
-
-			glNormal3f( 0., 0., -1. );
-				glTexCoord2f( 0., 0. );
-				glVertex3f( -dx, -dy, -dz );
-				glTexCoord2f( 0., 1. );
-				glVertex3f( -dx,  dy, -dz );
-				glTexCoord2f( 1., 1. );
-				glVertex3f(  dx,  dy, -dz );
-				glTexCoord2f( 1., 0. );
-				glVertex3f(  dx, -dy, -dz );
-
-			glColor3f( 1., 0., 0. );
-			glNormal3f(  1., 0., 0. );
-				glVertex3f(  dx, -dy,  dz );
-				glVertex3f(  dx, -dy, -dz );
-				glVertex3f(  dx,  dy, -dz );
-				glVertex3f(  dx,  dy,  dz );
-
-			glNormal3f( -1., 0., 0. );
-				glVertex3f( -dx, -dy,  dz );
-				glVertex3f( -dx,  dy,  dz );
-				glVertex3f( -dx,  dy, -dz );
-				glVertex3f( -dx, -dy, -dz );
-
-			glColor3f( 0., 1., 0. );
-			glNormal3f( 0.,  1., 0. );
-				glVertex3f( -dx,  dy,  dz );
-				glVertex3f(  dx,  dy,  dz );
-				glVertex3f(  dx,  dy, -dz );
-				glVertex3f( -dx,  dy, -dz );
-
-			glNormal3f( 0., -1., 0. );
-				glVertex3f( -dx, -dy,  dz );
-				glVertex3f( -dx, -dy, -dz );
-				glVertex3f(  dx, -dy, -dz );
-				glVertex3f(  dx, -dy,  dz );
-
-		glEnd( );
 
 	glEndList( );
+
+	EarthList = glGenLists(2);
+	glNewList(EarthList, GL_COMPILE);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex0);
+	MjbSphere(1, 100, 100);
+
+	glDisable(GL_TEXTURE_2D);
+
+
+	glEndList();
 
 
 	// create the axes:
@@ -1165,6 +1130,25 @@ Keyboard( unsigned char c, int x, int y )
 		case 'p':
 		case 'P':
 			WhichProjection = PERSP;
+			break;
+
+		case 'i':
+		case 'I':
+			MS_PER_CYCLE = MS_PER_CYCLE / 10;
+			break;
+
+		case 'd':
+		case 'D':
+			MS_PER_CYCLE = MS_PER_CYCLE * 10;
+			break;
+
+		case 'f':
+		case 'F':
+			Freeze = !Freeze;
+			if (Freeze)
+				glutIdleFunc(NULL);
+			else
+				glutIdleFunc(Animate);
 			break;
 
 		case 'q':

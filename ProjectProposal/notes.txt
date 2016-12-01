@@ -1,0 +1,9 @@
+sun rotates every 35 days at poles
+earth every 24 hours -> 1 day
+sun should rate 1/35 the speed of earth
+
+earth circles sun every 365 days 
+365/35 = 10.4 -> value to mod transformation by
+
+ADDED FUNC: 'i' and 'd' increase/decrease speed of simulation
+'f' freezes simulation
