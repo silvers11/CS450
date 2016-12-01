@@ -714,7 +714,7 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	gluLookAt( 0., 2., 11.,     0., 0., 0.,     0., 1., 0. );
 
 
 	// rotate the scene:
@@ -769,7 +769,9 @@ Display( )
 	glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0); // one cycle = one year
 	glTranslatef(9, 0, 0);
 	glRotatef((GLfloat)Time * 360 * 365, 0.0, 1.0, 0.0); //completes 365 rotations a year
+
 	glCallList(EarthList);
+	
 
 
 	// draw some gratuitous text that just rotates on top of the scene:

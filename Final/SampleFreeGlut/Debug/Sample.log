@@ -8,6 +8,6 @@ c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(465): 
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(480): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(481): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(766): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(1464): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(1466): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
   Sample.vcxproj -> C:\Users\Steven\Documents\school\CS\CS450\Final\SampleFreeGlut\.\Debug\Sample.exe

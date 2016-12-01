@@ -7,3 +7,5 @@ earth circles sun every 365 days
 
 ADDED FUNC: 'i' and 'd' increase/decrease speed of simulation
 'f' freezes simulation
+
+inital points for oregon eye position:  8.7, 0.6, 0.87
