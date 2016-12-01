@@ -9,3 +9,8 @@ ADDED FUNC: 'i' and 'd' increase/decrease speed of simulation
 'f' freezes simulation
 
 inital points for oregon eye position:  8.7, 0.6, 0.87
+
+to try:
+make camera fixed, rotate scene to sim earth viewpoint
+			draw three different scenes, one for each viewpoint
+			use same objects, just different transformations

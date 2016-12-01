@@ -714,12 +714,13 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
+
 	gluLookAt( 0., 2., 11.,     0., 0., 0.,     0., 1., 0. );
 
 
 	// rotate the scene:
 
-	glRotatef( (GLfloat)Yrot, 0., 1., 0. );
+	glRotatef( (GLfloat)Time * 360, 0., 1., 0. );
 	glRotatef( (GLfloat)Xrot, 1., 0., 0. );
 
 
