@@ -7,7 +7,38 @@ earth circles sun every 365 days
 
 ADDED FUNC: 'i' and 'd' increase/decrease speed of simulation
 'f' freezes simulation
+		case 'i':
+		case 'I':
+			MS_PER_CYCLE = MS_PER_CYCLE / 10;
+			break;
 
+		case 'd':
+		case 'D':
+			MS_PER_CYCLE = MS_PER_CYCLE * 10;
+			break;
+
+		case 'm':
+		case 'M':
+			ViewPoint = 2;
+			break;
+
+		case 'e':
+		case 'E':
+			ViewPoint = 1;
+			break;
+
+		case 'r':
+		case 'R':
+			Reset();
+			break;
+		case 'f':
+		case 'F':
+			Freeze = !Freeze;
+			if (Freeze)
+				glutIdleFunc(NULL);
+			else
+				glutIdleFunc(Animate);
+			break;
 inital points for oregon eye position:  8.7, 0.6, 0.87
 
 to try:
@@ -23,3 +54,8 @@ approx: 1/4 ratio
 
 moon completes earth orbit in 27.322 days
 moon completes lunar day in ~ 27.322 days
+
+same side of moon always faces earth, 
+
+lunar phase cycle: 29.5 days
+365/29.5 = 12.37

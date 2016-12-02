@@ -944,7 +944,36 @@ Display( )
 
 	//moon view
 	else if(ViewPoint == 2) {
+	
+		gluLookAt(0., 0., .37, 0., 0., 5, 0., 1., 0.);
 
+		//moon transformations
+		glPushMatrix();
+
+		glCallList(MoonList);
+
+		glPopMatrix();
+
+		//earth transformations
+		glPushMatrix();
+		glPushAttrib(GL_LIGHTING_BIT);
+		glTranslatef(0, 0, 2);
+		glRotatef(Time * 360 * 365, 0.0, 1.0, 0.0);//full rotation every 24 hours
+		glCallList(EarthList);
+		glPopAttrib();
+		glPopMatrix();
+
+		//sun transformations
+		glPushMatrix();
+		glPushAttrib(GL_LIGHTING_BIT);
+		glRotatef((GLfloat)Time * 360 * 12.37, 0.0, -1.0, 0.0);//accounts for lunar cycle
+		glTranslatef(0, 0, 9);
+		glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 365/35 = 10.4
+		SetMaterial(1.0, 1.0, .0, 1.);
+		glCallList(SunList);
+		glPopAttrib();
+		SetPointLight(GL_LIGHT0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
+		glPopMatrix();
 	}
 	else {
 		Reset();
