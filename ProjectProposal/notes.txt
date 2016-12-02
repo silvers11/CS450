@@ -14,3 +14,12 @@ to try:
 make camera fixed, rotate scene to sim earth viewpoint
 			draw three different scenes, one for each viewpoint
 			use same objects, just different transformations
+
+earth to sun: 92.96 million miles
+earth to moon: 238,900 mi
+radius of earth: 3,959 mi
+radius of moon: 1,079 mi
+approx: 1/4 ratio
+
+moon completes earth orbit in 27.322 days
+moon completes lunar day in ~ 27.322 days

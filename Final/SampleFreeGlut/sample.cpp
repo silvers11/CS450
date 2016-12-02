@@ -731,7 +731,7 @@ Display( )
 	// set the eye position, look-at position, and up-vector:
 
 
-	gluLookAt( 0., 2., 11.,     0., 0., 0.,     0., 1., 0. );
+	gluLookAt( 0., 0., 11.,     0., 0., 0.,     0., 1., 0. );
 
 
 	// rotate the scene:
@@ -781,7 +781,7 @@ Display( )
 	// draw the current object:
 	//sun transformations
 	glPushMatrix();
-	glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 35/365 = 10.4
+	glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 365/35 = 10.4
 	glCallList( SunList );
 	glPopMatrix();
 
@@ -793,9 +793,18 @@ Display( )
 
 	glCallList(EarthList);
 	glPopMatrix();
-	glTranslatef(5, 0, 0);
-	glCallList(MoonList);
+
 	//moon transformations
+	glPushMatrix();
+	glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0);
+	glTranslatef(9, 0, 0);
+	glRotatef((GLfloat)Time * 360 * 13.36, 0.0, 1.0, 0.0);//full orbit ~every 27 days 365/27.322 = 13.5
+	glTranslatef(2, 0, 0);
+	glRotatef(Time * 360 * 13.52, 0.0, 1.0, 0.0); //full rotation every 27 days 365/27 = 13.5
+	glCallList(MoonList);
+	
+	glPopMatrix();
+
 
 	// draw some gratuitous text that just rotates on top of the scene:
 

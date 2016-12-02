@@ -8,6 +8,8 @@ c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(466): 
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(481): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(482): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(784): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(1504): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(801): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(803): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(1513): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
   Sample.vcxproj -> C:\Users\Steven\Documents\school\CS\CS450\Final\SampleFreeGlut\.\Debug\Sample.exe
