@@ -199,6 +199,7 @@ int	Width2 = 800;
 int	Height2 = 800;
 GLuint	tex0, tex1, tex2;
 int level, ncomps, border;
+int ViewPoint;
 
 // function prototypes:
 
@@ -786,7 +787,7 @@ Display( )
 	// set the eye position, look-at position, and up-vector:
 
 
-	gluLookAt( 0., 0., 11.,     0., 0., 0.,     0., 1., 0. );
+	
 
 
 	// rotate the scene:
@@ -826,49 +827,99 @@ Display( )
 		glColor3fv( &Colors[WhichColor][0] );
 		glCallList( AxesList );
 	}
-	//lighting for HW 4
 	glEnable(GL_LIGHTING);
-
-	//stationary point light
-	SetPointLight(GL_LIGHT0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
-
-	// since we are using glScalef( ), be sure normals get unitized:
-
-	glEnable( GL_NORMALIZE );
+	//general view
+	if(ViewPoint == 0) {
+		gluLookAt(0., 0., 11., 0., 0., 0., 0., 1., 0.);
+		//lighting for HW 4
 
 
-	// draw the current object:
-	//sun transformations
-	glPushMatrix();
-	glPushAttrib(GL_LIGHTING_BIT);
-	glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 365/35 = 10.4
-	SetMaterial(1.0, 1.0, .0, 1.);
-	glCallList( SunList );
-	glPopAttrib();
-	glPopMatrix();
+		//stationary point light
+		SetPointLight(GL_LIGHT0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
 
-	//earth transformations
-	glPushMatrix();
-	glPushAttrib(GL_LIGHTING_BIT);
-	glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0); // one cycle = one year
-	glTranslatef(9, 0, 0);
-	glRotatef((GLfloat)Time * 360 * 365, 0.0, 1.0, 0.0); //completes 365 rotations a year
-	glCallList(EarthList);
-	glPopAttrib();
-	glPopMatrix();
+		// since we are using glScalef( ), be sure normals get unitized:
 
-	//moon transformations
-	glPushMatrix();
-	glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0);
-	glTranslatef(9, 0, 0);
-	glRotatef((GLfloat)Time * 360 * 13.36, 0.0, 1.0, 0.0);//full orbit ~every 27 days 365/27.322 = 13.5
-	glTranslatef(2, 0, 0);
-	glRotatef(Time * 360 * 13.52, 0.0, 1.0, 0.0); //full rotation every 27 days 365/27 = 13.5
-	glCallList(MoonList);
-	
-	glPopMatrix();
+		glEnable(GL_NORMALIZE);
 
 
+		// draw the current object:
+		//sun transformations
+		glPushMatrix();
+		glPushAttrib(GL_LIGHTING_BIT);
+		glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 365/35 = 10.4
+		SetMaterial(1.0, 1.0, .0, 1.);
+		glCallList(SunList);
+		glPopAttrib();
+		glPopMatrix();
+
+		//earth transformations
+		glPushMatrix();
+		glPushAttrib(GL_LIGHTING_BIT);
+		glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0); // one cycle = one year
+		glTranslatef(9, 0, 0);
+		glRotatef((GLfloat)Time * 360 * 365, 0.0, 1.0, 0.0); //completes 365 rotations a year
+		glCallList(EarthList);
+		glPopAttrib();
+		glPopMatrix();
+
+		//moon transformations
+		glPushMatrix();
+		glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0);
+		glTranslatef(9, 0, 0);
+		glRotatef((GLfloat)Time * 360 * 13.36, 0.0, 1.0, 0.0);//full orbit ~every 27 days 365/27.322 = 13.5
+		glTranslatef(2, 0, 0);
+		glRotatef(Time * 360 * 13.52, 0.0, 1.0, 0.0); //full rotation every 27 days 365/27 = 13.5
+		glCallList(MoonList);
+
+		glPopMatrix();
+	}
+
+	//earth view 
+	else if(ViewPoint == 1) {
+		gluLookAt(0., 0., 1.05, 0., 0., 5., 0., 1., 0.);
+
+		//sun transformations
+		glPushMatrix();
+		glPushAttrib(GL_LIGHTING_BIT);
+		glRotatef((GLfloat)Time * 360 * 365, 0.0, -1.0, 0.0);//passes by a given point on earth once a day
+		glTranslatef(.4, 0, -15);
+		glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 365/35 = 10.4
+		SetMaterial(1.0, 1.0, .0, 1.);
+		glCallList(SunList);
+		glPopAttrib();
+		SetPointLight(GL_LIGHT0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
+		glPopMatrix();
+
+		//earth transformations
+		glPushMatrix();
+		glPushAttrib(GL_LIGHTING_BIT);
+		glTranslatef(.4, 0, 0);
+		glRotatef(45, 1., 0., 0.);
+		glCallList(EarthList);
+		glPopAttrib();
+		glPopMatrix();
+
+		//moon transformations
+		glPushMatrix();
+
+		glRotatef((GLfloat)Time * 360 * 365, 0.0, -1.0, 0.0);//passes by a given point on earth once a day
+		glTranslatef(.4, 0, 2);
+		glRotatef(45, 1., 0., 0.);
+		glCallList(MoonList);
+
+		glPopMatrix();
+
+
+
+	}
+
+	//moon view
+	else if(ViewPoint == 2) {
+
+	}
+	else {
+		Reset();
+	}
 	// draw some gratuitous text that just rotates on top of the scene:
 
 	glDisable( GL_DEPTH_TEST );
@@ -1254,6 +1305,20 @@ Keyboard( unsigned char c, int x, int y )
 			MS_PER_CYCLE = MS_PER_CYCLE * 10;
 			break;
 
+		case 'm':
+		case 'M':
+			ViewPoint = 2;
+			break;
+
+		case 'e':
+		case 'E':
+			ViewPoint = 1;
+			break;
+
+		case 'r':
+		case 'R':
+			Reset();
+			break;
 		case 'f':
 		case 'F':
 			Freeze = !Freeze;
@@ -1369,6 +1434,7 @@ MouseMotion( int x, int y )
 void
 Reset( )
 {
+	ViewPoint = 0;
 	ActiveButton = 0;
 	AxesOn = 1;
 	DebugOn = 0;
