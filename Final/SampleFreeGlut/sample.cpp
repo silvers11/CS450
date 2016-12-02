@@ -15,7 +15,7 @@
 #include <GL/glu.h>
 #include "glut.h"
 
-
+#define DEG2RAD 3.14159/180.0
 //	This is a sample OpenGL / GLUT program
 //
 //	The objective is to draw a 3d object and change the color of the axes
@@ -200,7 +200,7 @@ int	Height2 = 800;
 GLuint	tex0, tex1, tex2;
 int level, ncomps, border;
 int ViewPoint;
-
+float xForEarth, zForEarth;
 // function prototypes:
 
 void	Animate( );
@@ -785,7 +785,7 @@ Display( )
 
 
 	// set the eye position, look-at position, and up-vector:
-
+	gluLookAt(0., 3., 15., 0., 0., 0., 0., 1., 0.);
 
 	
 
@@ -830,9 +830,7 @@ Display( )
 	glEnable(GL_LIGHTING);
 	//general view
 	if(ViewPoint == 0) {
-		gluLookAt(0., 0., 11., 0., 0., 0., 0., 1., 0.);
-		//lighting for HW 4
-
+		
 
 		//stationary point light
 		SetPointLight(GL_LIGHT0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
@@ -853,10 +851,12 @@ Display( )
 		glPopMatrix();
 
 		//earth transformations
+		xForEarth = cos((Time * 360)*DEG2RAD)*6.0f;//to change the x co-ordinate
+		zForEarth = sin((Time * 360)*DEG2RAD)*2.3f;//to change the y co-ordinate
 		glPushMatrix();
 		glPushAttrib(GL_LIGHTING_BIT);
 		glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0); // one cycle = one year
-		glTranslatef(9, 0, 0);
+		glTranslatef(8+xForEarth, 0, 8+zForEarth);
 		glRotatef((GLfloat)Time * 360 * 365, 0.0, 1.0, 0.0); //completes 365 rotations a year
 		glCallList(EarthList);
 		glPopAttrib();
@@ -865,7 +865,7 @@ Display( )
 		//moon transformations
 		glPushMatrix();
 		glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0);
-		glTranslatef(9, 0, 0);
+		glTranslatef(8 + xForEarth, 0, 8 + zForEarth);// move to earth
 		glRotatef((GLfloat)Time * 360 * 13.36, 0.0, 1.0, 0.0);//full orbit ~every 27 days 365/27.322 = 13.5
 		glTranslatef(2, 0, 0);
 		glRotatef(Time * 360 * 13.52, 0.0, 1.0, 0.0); //full rotation every 27 days 365/27 = 13.5
@@ -921,10 +921,6 @@ Display( )
 		Reset();
 	}
 	// draw some gratuitous text that just rotates on top of the scene:
-
-	glDisable( GL_DEPTH_TEST );
-	glColor3f( 0., 1., 1. );
-	DoRasterString( 0., 1., 0., "Text That Moves" );
 
 
 	// draw some gratuitous text that is fixed on the screen:
