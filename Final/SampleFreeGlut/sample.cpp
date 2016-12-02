@@ -785,39 +785,41 @@ Display( )
 
 
 	// set the eye position, look-at position, and up-vector:
-	gluLookAt(0., 3., 15., 0., 0., 0., 0., 1., 0.);
+	
+	if (ViewPoint != 0) {
+		// rotate the scene:
 
+		glRotatef((GLfloat)Yrot, 0., 1., 0.);
+		glRotatef((GLfloat)Xrot, 1., 0., 0.);
+
+
+		// uniformly scale the scene:
+
+		if (Scale < MINSCALE)
+			Scale = MINSCALE;
+		glScalef((GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale);
+
+
+		// set the fog parameters:
+
+		if (DepthCueOn != 0)
+		{
+			glFogi(GL_FOG_MODE, FOGMODE);
+			glFogfv(GL_FOG_COLOR, FOGCOLOR);
+			glFogf(GL_FOG_DENSITY, FOGDENSITY);
+			glFogf(GL_FOG_START, FOGSTART);
+			glFogf(GL_FOG_END, FOGEND);
+			glEnable(GL_FOG);
+		}
+		else
+		{
+			glDisable(GL_FOG);
+		}
+	}
 	
 
 
-	// rotate the scene:
-
-	glRotatef( (GLfloat)Yrot, 0., 1., 0. );
-	glRotatef( (GLfloat)Xrot, 1., 0., 0. );
-
-
-	// uniformly scale the scene:
-
-	if( Scale < MINSCALE )
-		Scale = MINSCALE;
-	glScalef( (GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale );
-
-
-	// set the fog parameters:
-
-	if( DepthCueOn != 0 )
-	{
-		glFogi( GL_FOG_MODE, FOGMODE );
-		glFogfv( GL_FOG_COLOR, FOGCOLOR );
-		glFogf( GL_FOG_DENSITY, FOGDENSITY );
-		glFogf( GL_FOG_START, FOGSTART );
-		glFogf( GL_FOG_END, FOGEND );
-		glEnable( GL_FOG );
-	}
-	else
-	{
-		glDisable( GL_FOG );
-	}
+	
 
 
 	// possibly draw the axes:
@@ -830,8 +832,35 @@ Display( )
 	glEnable(GL_LIGHTING);
 	//general view
 	if(ViewPoint == 0) {
-		
+		gluLookAt(0., 3., 15., 0., 0., 0., 0., 1., 0.);
+		// rotate the scene:
 
+		glRotatef((GLfloat)Yrot, 0., 1., 0.);
+		glRotatef((GLfloat)Xrot, 1., 0., 0.);
+
+
+		// uniformly scale the scene:
+
+		if (Scale < MINSCALE)
+			Scale = MINSCALE;
+		glScalef((GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale);
+
+
+		// set the fog parameters:
+
+		if (DepthCueOn != 0)
+		{
+			glFogi(GL_FOG_MODE, FOGMODE);
+			glFogfv(GL_FOG_COLOR, FOGCOLOR);
+			glFogf(GL_FOG_DENSITY, FOGDENSITY);
+			glFogf(GL_FOG_START, FOGSTART);
+			glFogf(GL_FOG_END, FOGEND);
+			glEnable(GL_FOG);
+		}
+		else
+		{
+			glDisable(GL_FOG);
+		}
 		//stationary point light
 		SetPointLight(GL_LIGHT0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
 
@@ -876,8 +905,8 @@ Display( )
 
 	//earth view 
 	else if(ViewPoint == 1) {
-		gluLookAt(0., 0., 1.05, 0., 0., 5., 0., 1., 0.);
-
+		gluLookAt(0., 0., 1.07, 0., 0., 5., 0., 1., 0.);
+		
 		//sun transformations
 		glPushMatrix();
 		glPushAttrib(GL_LIGHTING_BIT);
