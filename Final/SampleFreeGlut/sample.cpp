@@ -176,7 +176,7 @@ GLuint	AxesList;				// list to hold the axes
 int		AxesOn;					// != 0 means to draw the axes
 int		DebugOn;				// != 0 means to print debugging info
 int		DepthCueOn;				// != 0 means to use intensity depth cueing
-GLuint	SunList, EarthList;		// object display list
+GLuint	SunList, EarthList, MoonList;		// object display list
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
 int		WhichColor;				// index into Colors[ ]
@@ -190,13 +190,14 @@ bool	Freeze;
 int		MS_PER_CYCLE = 1000000;
 unsigned char*	MyTex;
 unsigned char*	MyTex2;
+unsigned char*	MyTex3;
 int	TexWidth = 1024;
 int	TexHeight = 512;
 int	Width = 2614;
 int	Height = 2489;
 int	Width2 = 800;
 int	Height2 = 800;
-GLuint	tex0, tex1;
+GLuint	tex0, tex1, tex2;
 int level, ncomps, border;
 
 // function prototypes:
@@ -578,10 +579,12 @@ main( int argc, char *argv[ ] )
 
 	MyTex = BmpToTexture("worldtex.bmp", &TexWidth, &TexHeight);
 	MyTex2 = BmpToTexture("texture_sun.bmp", &Width, &Height);
+	MyTex3 = BmpToTexture("moon2.bmp", &Width2, &Height2);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 	glGenTextures(1, &tex0); // assign binding “handles”
 	glGenTextures(1, &tex1);
+	glGenTextures(1, &tex2);
 
 	glBindTexture(GL_TEXTURE_2D, tex0);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -605,6 +608,19 @@ main( int argc, char *argv[ ] )
 	ncomps = 3;
 	border = 0;
 	glTexImage2D(GL_TEXTURE_2D, level, ncomps, Width, Height, border, GL_RGB, GL_UNSIGNED_BYTE, MyTex2);
+
+
+	glBindTexture(GL_TEXTURE_2D, tex2);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	level = 0;
+	ncomps = 3;
+	border = 0;
+	glTexImage2D(GL_TEXTURE_2D, level, ncomps, Width, Height, border, GL_RGB, GL_UNSIGNED_BYTE, MyTex3);
+
 
 	InitLists( );
 
@@ -720,7 +736,7 @@ Display( )
 
 	// rotate the scene:
 
-	glRotatef( (GLfloat)Time * 360, 0., 1., 0. );
+	glRotatef( (GLfloat)Yrot, 0., 1., 0. );
 	glRotatef( (GLfloat)Xrot, 1., 0., 0. );
 
 
@@ -763,17 +779,23 @@ Display( )
 
 
 	// draw the current object:
+	//sun transformations
 	glPushMatrix();
 	glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 35/365 = 10.4
 	glCallList( SunList );
 	glPopMatrix();
+
+	//earth transformations
+	glPushMatrix();
 	glRotatef((GLfloat)Time * 360, 0.0, 1.0, 0.0); // one cycle = one year
 	glTranslatef(9, 0, 0);
 	glRotatef((GLfloat)Time * 360 * 365, 0.0, 1.0, 0.0); //completes 365 rotations a year
 
 	glCallList(EarthList);
-	
-
+	glPopMatrix();
+	glTranslatef(5, 0, 0);
+	glCallList(MoonList);
+	//moon transformations
 
 	// draw some gratuitous text that just rotates on top of the scene:
 
@@ -1079,6 +1101,7 @@ InitLists( )
 
 	// create the object:
 
+	//sun
 	SunList = glGenLists( 1 );
 	glNewList(SunList, GL_COMPILE );
 
@@ -1091,12 +1114,26 @@ InitLists( )
 
 	glEndList( );
 
+	//earth
 	EarthList = glGenLists(2);
 	glNewList(EarthList, GL_COMPILE);
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex0);
 	MjbSphere(1, 100, 100);
+
+	glDisable(GL_TEXTURE_2D);
+
+
+	glEndList();
+
+	//moon
+	MoonList = glGenLists(3);
+	glNewList(MoonList, GL_COMPILE);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex2);
+	MjbSphere(.25, 100, 100);
 
 	glDisable(GL_TEXTURE_2D);
 
