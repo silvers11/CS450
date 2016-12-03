@@ -966,7 +966,7 @@ Display( )
 		//sun transformations
 		glPushMatrix();
 		glPushAttrib(GL_LIGHTING_BIT);
-		glRotatef((GLfloat)Time * 360 * 12.37, 0.0, -1.0, 0.0);//accounts for lunar cycle
+		glRotatef((GLfloat)Time * 360 * 12.37, 0.0, -1.0, 0.0);//passes by a given point on earth once a day
 		glTranslatef(0, 0, 9);
 		glRotatef(Time * 360 * 10.4, 0.0, 1.0, 0.0); //full rotation every 35 days 365/35 = 10.4
 		SetMaterial(1.0, 1.0, .0, 1.);
