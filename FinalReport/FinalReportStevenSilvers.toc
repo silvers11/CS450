@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {I}T-Shirt}{1}
+\contentsline {section}{\numberline {II}Proposal}{1}
+\contentsline {section}{\numberline {III}What was done}{1}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Outside View}{1}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Oregon View}{3}
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Moon View}{4}
+\contentsline {section}{\numberline {IV}Changes from Proposal}{4}
+\contentsline {section}{\numberline {V}What I learned}{5}

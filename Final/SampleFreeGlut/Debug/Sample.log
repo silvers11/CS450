@@ -22,6 +22,6 @@ c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(925): 
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(935): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(969): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(971): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(1696): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\steven\documents\school\cs\cs450\final\samplefreeglut\sample.cpp(1698): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
   Sample.vcxproj -> C:\Users\Steven\Documents\school\CS\CS450\Final\SampleFreeGlut\.\Debug\Sample.exe

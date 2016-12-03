@@ -40,6 +40,7 @@
 	\pagenumbering{gobble}	
 	\maketitle
 	\end{titlepage}
+	\tableofcontents
 	\newpage
 	\pagenumbering{arabic}
 	\section{T-Shirt}
@@ -72,7 +73,7 @@
 	\begin{figure}[h]
 		\includegraphics[scale=.5]{cap3}
 		\includegraphics[scale=.5]{cap1}
-		\caption{elliptical path of Earth}
+		\caption{elliptical path of the Earth}
 	\end{figure}
 	\newline
 			I elected not to put the moon on an elliptical path due to the exaggeration of distances in my simulation. Using a circular path for the Moon makes the interaction between the Moon and Earth easier to do and look less cluttered in the end. However, the size of the moon is 1/4 that of the Earth, which is reflected accurately in my system
@@ -82,11 +83,42 @@
 	\newline
 	\subsection{Oregon View}
 	\par
-			
-	
+			Creating this viewpoint caused a lot of trouble and a few long nights. When I first approached the problem, my idea was to just draw the objects like they were for the outside view and then transform the eye location and look at values with those objects. This proved to be futile as figuring out that kind of matrix transformation would ultimately be too complicated. 
+	\newline
+	\par
+			I stopped to think about what viewing from Oregon would look like, and realized that when I stand outside looking up, from my perspective I'm not the one that is moving, the Sun and the Moon are the ones that are moving around me. This gave me the idea that for the Oregon viewpoint I should make the camera and the Earth stationary, and rotate the Moon and the Sun around the Earth. 
+ 	
 	\begin{figure}[h]
 		\includegraphics[scale=.67]{cap2}
 		\caption{Watching the Sun set from Oregon viewpoint}
 	\end{figure}
 
+	\par
+			I decided it would be easiest to put the Earth at the origin and rotate it so that the normal vector from Oregon's location on Earth would be about the same as the positive Z axis. This led to some quick guess and check work to find the best location for the camera's eye near the Earth, as well as the creation of some temporary test objects so I wasn't starring at just blackness. Since just staring out from Oregon waiting for the Sun and Moon to pass by, I included functionality to rotate the camera's eye so that we could also look side to side, as demonstrated in figure 2.
+	\newline
+	\subsection{Moon View}
+	\par
+			The Moon viewpoint went quite smoothly once the Earth viewpoint was figured out and completed. During my research I came across the fact that the Moon has a synchronous orbit about the Earth. The effect of this is that the same side of the moon always faces the Earth, meaning the Sun would be the only moving object in my system besides the Earth rotating.
+			
+	\begin{figure}[h]
+	\includegraphics[scale=.67]{cap4}
+	\caption{Looking at the Earth from the Moon}
+	\end{figure}
+
+	\par
+			Exaggeration was again used in the distances from the Moon to the Sun and Earth, but they were kept consistent with the other viewpoints. The same camera functionality from the Earth viewpoint was included so that the user can look around while on viewing from the Moon.		
+	\newline
+	\section{Changes from Proposal}
+	\par
+			All changes in my project are either added functionality or to comply with the additional notes on the course website. As mentioned previously the distances between the three bodies is not to scale, nor is the size of the sun to the Earth and Moon. I elected to not do shadowing like I stated I wanted to in my proposal, as the notes on the course site made this sound more difficult than I would be capable of doing. I added quite a bit of functionality to make my project more user interactive and easy to work with.
+	\newline
+	\par
+			Since it was getting boring waiting for my simulation to complete an orbit to make sure it was functioning properly, I added the ability to speed up and slow down the simulation by pressing 'I' or 'D' on the keyboard. The different viewpoints are also toggled using the keyboard, 'M' for Moon and 'E' for Earth, and 'R' to call the reset function which defaults to the outside viewpoint. A freeze ability was also added, this was just the same freeze functionality from previous projects. Camera control was added to get a better look at the systems, all three viewpoints can rotate the scene and the outside viewpoint can also zoom in and out.			
+	\newline
+	\section{What I learned}
+	\par
+			I think the biggest thing I learned from this project isn't even necessarily directly related to computer graphics. Making the realization that changing your perception within or about a system can completely open up new possibilities is something I learned when trying to make the additional viewpoints. I'm sure if I kept working and made endless mathematical calculations I could've had a moving camera eye, but instead it ended up being a quite simple solution with equal or even better results. While I did know that space was mostly just one space, researching the actual distances woke me up to just how far away everything is and why making those to scale in this project would make it less fun to play with.
+	\newline
+	\par
+			I leatned a lot more about our solar system than I initially thought I would. Things like how quickly the Sun rotates varies from place to place on the Sun, or that in our solar system almost everything orbits the Sun in the anticlockwise direction. It was information like this that helped me make sure that certain details were correct, like the Sun rising in the East when using the Oregon viewpoint.
 \end{document}

@@ -1361,11 +1361,13 @@ Keyboard( unsigned char c, int x, int y )
 
 		case 'm':
 		case 'M':
+			Xrot = Yrot = 0.;
 			ViewPoint = 2;
 			break;
 
 		case 'e':
 		case 'E':
+			Xrot = Yrot = 0.;
 			ViewPoint = 1;
 			break;
 
@@ -1490,7 +1492,7 @@ Reset( )
 {
 	ViewPoint = 0;
 	ActiveButton = 0;
-	AxesOn = 1;
+	AxesOn = 0;
 	DebugOn = 0;
 	DepthCueOn = 0;
 	Scale  = 1.0;

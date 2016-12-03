@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.11.28)  2 DEC 2016 16:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.11.28)  2 DEC 2016 18:51
 entering extended mode
 **./FinalReportStevenSilvers.tex
 (FinalReportStevenSilvers.tex
@@ -267,93 +267,142 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 \c@lstlisting=\count109
- [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 47--49
+ [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] (FinalReportStevenSilv
+ers.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 4.
+)
+\tf@toc=\write3
+\openout3 = `FinalReportStevenSilvers.toc'.
+
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 48--50
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--53
+Underfull \hbox (badness 10000) in paragraph at lines 52--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--56
+Underfull \hbox (badness 10000) in paragraph at lines 55--57
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--60
+Underfull \hbox (badness 10000) in paragraph at lines 59--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--63
+Underfull \hbox (badness 10000) in paragraph at lines 62--64
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--67
+Underfull \hbox (badness 10000) in paragraph at lines 66--68
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--70
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
 
  []
 
 [1]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 70.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 71.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) (sample.cpp
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <9> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 882.
 )
-<cap3.png, id=11, 446.41782pt x 466.74374pt>
+<cap3.png, id=14, 446.41782pt x 466.74374pt>
 File: cap3.png Graphic file (type png)
  <use cap3.png>
-Package pdftex.def Info: cap3.png used on input line 73.
+Package pdftex.def Info: cap3.png used on input line 74.
 (pdftex.def)             Requested size: 223.20836pt x 233.37129pt.
 
-<cap1.png, id=12, 447.17062pt x 465.99094pt>
+<cap1.png, id=15, 447.17062pt x 465.99094pt>
 File: cap1.png Graphic file (type png)
  <use cap1.png>
-Package pdftex.def Info: cap1.png used on input line 74.
+Package pdftex.def Info: cap1.png used on input line 75.
 (pdftex.def)             Requested size: 223.58476pt x 232.99489pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--80
+Underfull \hbox (badness 10000) in paragraph at lines 72--81
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--83
+Underfull \hbox (badness 10000) in paragraph at lines 82--84
 
  []
 
-<cap2.png, id=13, 451.6875pt x 475.7775pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 86--88
+
+ []
+
+[2 <./cap3.png> <./cap1.png>] <cap2.png, id=21, 451.6875pt x 475.7775pt>
 File: cap2.png Graphic file (type png)
- <use cap2.png>
-Package pdftex.def Info: cap2.png used on input line 88.
+
+<use cap2.png>
+Package pdftex.def Info: cap2.png used on input line 92.
 (pdftex.def)             Requested size: 302.62904pt x 318.76926pt.
- [2 <./cap3.png> <./cap1.png>] [3 <./cap2.png>] (FinalReportStevenSilvers.aux) 
-) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--99
+
+ []
+
+[3 <./cap2.png>] <cap4.png, id=27, 450.9347pt x 468.24937pt>
+File: cap4.png Graphic file (type png)
+ <use cap4.png>
+Package pdftex.def Info: cap4.png used on input line 104.
+(pdftex.def)             Requested size: 302.12468pt x 313.72543pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--111
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--115
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--118
+
+ []
+
+[4 <./cap4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 120--122
+
+ []
+
+[5] (FinalReportStevenSilvers.aux) ) 
 Here is how much of TeX's memory you used:
- 3881 strings out of 493333
- 60782 string characters out of 3139190
+ 3910 strings out of 493333
+ 61115 string characters out of 3139190
  188365 words of memory out of 3000000
- 7373 multiletter control sequences out of 15000+200000
- 31912 words of font info for 62 fonts, out of 3000000 for 9000
+ 7389 multiletter control sequences out of 15000+200000
+ 35755 words of font info for 72 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,8n,65p,718b,1105s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/MiK
-TeX 2.9/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/
-utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on FinalReportStevenSilvers.pdf (4 pages, 237960 bytes).
+ 40i,8n,65p,753b,1105s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvip
+s/base/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrb8a.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times
+/utmri8a.pfb>
+Output written on FinalReportStevenSilvers.pdf (7 pages, 406867 bytes).
 PDF statistics:
- 41 PDF objects out of 1000 (max. 8388607)
+ 53 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
